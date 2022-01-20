@@ -20,7 +20,7 @@ def create_and_fill_test_db(tmpdir_factory):
         cur.execute("INSERT INTO Table_1 VALUES (?, ?)", ("Nikita", 15))
         cur.execute("INSERT INTO Table_1 VALUES (?, ?)", ("Alex", 20))
         cur.execute("INSERT INTO Table_1 VALUES (?, ?)", ("Maria", 25))
-        cur.execute("INSERT INTO Table_1 VALUES (?, ?)", ("Boris", 30))
+        cur.execute("INSERT INTO Table_1 VALUES (?, ?)", ("Boris", 34))
         cur.execute("INSERT INTO Table_1 VALUES (?, ?)", ("Liza", 35))
         cur.execute("INSERT INTO Table_2 VALUES (?, ?)", ("Nikita", 15))
         cur.execute("INSERT INTO Table_2 VALUES (?, ?)", ("Alex", 21))
@@ -49,3 +49,20 @@ def test_get_from_db(create_and_fill_test_db):
 
     for pair in pairs:
         print(pair)
+
+
+
+"""
+Прошу помочь написать тесты, которые бы сравнивали попарно значения в списке pairs
+Ниже пример как +- она бы выглядела с параметризацией
+"""
+
+
+@pytest.mark.parametrize('pair', [
+    (('Nikita', 15), ('Nikita', 15)),
+    (('Alex', 20), ('Alex', 21)),
+    (('Maria', 25), ('Maria', 23)),
+    (('Boris', 34), ('Boris', 34)),
+    (('Liza', 35), ('Liza', 33))])
+def test_simple_equals_in_pair(pair):
+    assert pair[0] == pair[1]
